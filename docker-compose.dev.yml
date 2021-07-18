@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.10'
 services:
     backend:
         container_name: backend
@@ -6,7 +6,7 @@ services:
           context: ./backend
           dockerfile: Dockerfile.dev
         volumes: 
-          - ./backend:/usr/src/app/
+          - ./backend/:/usr/src/app/
           - ipython_data_local:/root/.ipython/profile_default
         ports: 
           - "8000:8000"
@@ -15,7 +15,6 @@ services:
         restart: always
         depends_on: 
           - db
-        command: python3 manage.py runserver 0.0.0.0:8000
   
     db:
         container_name: db
