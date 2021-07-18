@@ -1,4 +1,4 @@
-FROM python:3.7.7-slim-buster AS dev_build
+FROM python:3 AS dev_build
 
 ARG DJANGO_ENV
 
@@ -17,15 +17,17 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
   POETRY_CACHE_DIR='/var/cache/pypoetry'
 
 
-RUN mkdir /app && pip install "poetry==$POETRY_VERSION" && poetry --version
+RUN pip install "poetry==$POETRY_VERSION" && poetry --version
 
-WORKDIR /app
+WORKDIR /app/backend
 
-COPY pyproject.toml poetry.lock /app/
+COPY . /app/backend/
 
 RUN poetry install
 
 
-COPY ./src/ .
+COPY ./backend/ .
+
+EXPOSE 8000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
