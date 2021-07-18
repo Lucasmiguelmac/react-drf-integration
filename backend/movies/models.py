@@ -20,4 +20,4 @@ class Rating(models.Model):
     rating  = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     comment = models.CharField(max_length=500)
     user    = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
-    movie   = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie   = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='ratings')
