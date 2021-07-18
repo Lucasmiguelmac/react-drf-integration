@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+    backend:
+        container_name: backend
+        build: 
+          context: ./backend
+          dockerfile: Dockerfile.dev
+        volumes: 
+          - ./backend:/usr/src/app/
+          - ipython_data_local:/root/.ipython/profile_default
+        ports: 
+          - "8000:8000"
+        env_file: 
+          - ./backend/.env
+        restart: always
+        depends_on: 
+          - db
+        command: python3 manage.py runserver 0.0.0.0:8000
+  
+    db:
+        container_name: db
+        image: postgres:12.0-alpine
+        restart: unless-stopped
+        volumes:
+        - postgres_data:/var/lib/postgresql/data/
+        env_file:
+        - ./db/.env
+
+volumes:
+    postgres_data:
+    ipython_data_local: {}
