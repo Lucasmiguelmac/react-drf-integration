@@ -12,7 +12,7 @@ class RatingSerializer(serializers.ModelSerializer):
         exclude = ('movie',)
 
 class MovieSerializer(serializers.ModelSerializer):
-    ratings = RatingSerializer(many=True)
+    ratings = RatingSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movie
