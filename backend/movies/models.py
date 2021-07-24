@@ -17,6 +17,7 @@ class Movie(models.Model):
     image           = models.URLField(default="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg")
 
 
+
 class Rating(models.Model):
     rating  = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     comment = models.CharField(max_length=500)

@@ -1,8 +1,11 @@
 import uuid
-from django.db import models
+from django.db.models.signals import pre_save
 from django.conf import settings
+from django.dispatch import receiver
 
+from users.models import CustomUser
+
+@receiver(pre_save, sender=CustomUser)
 def random_username(sender, instance, **kwargs):
     if not instance.username:
-        instance.username = uuid.uuid4().hex[:30]
-models.signals.pre_save.connect(random_username, sender=settings.AUTH_USER_MODEL)
+        instance.username = str(uuid.uuid4().hex[:30])

@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'rest_auth.registration',
 
     # Project apps
-    'movies',
-    'users'
+    'movies.apps.MoviesConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
