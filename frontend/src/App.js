@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter } from "react-router-dom";
 import MovieList from './components/movieList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
@@ -13,10 +14,10 @@ function App() {
     .then(resp => setMovies(resp.data))
   }, [])
   return (
-    <>
+    <BrowserRouter>
       <NavBar />
       <MovieList movies={movies} />
-    </>
+    </BrowserRouter>
   )
 }
 
