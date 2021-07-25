@@ -15,11 +15,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <div className="container-fluid overflow">
-        <div className="row">
-          <MovieList movies={movies} />
-        </div>
-      </div>
+      <MovieList movies={movies} />
     </>
   )
 }
