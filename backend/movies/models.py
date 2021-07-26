@@ -15,7 +15,7 @@ class Movie(models.Model):
     genre           = models.CharField(choices=MovieGenre.choices, max_length=123)
     plot            = models.TextField()
     image           = models.URLField(default="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg")
-
+    slug            = models.SlugField(editable=False, null=True)
 
 
 class Rating(models.Model):
