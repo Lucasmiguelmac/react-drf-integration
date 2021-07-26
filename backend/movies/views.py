@@ -8,3 +8,4 @@ from . import serializers as ms
 class MovieViewset(ModelViewSet):
     queryset = mm.Movie.objects.all().order_by('-release_date')
     serializer_class = ms.MovieSerializer
+    lookup_field = 'slug'
