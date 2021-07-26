@@ -14,7 +14,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route path="/" component={Home} exact/>
-          <Route path="/detail" component={MovieDetail}/>
+          <Route path="/:slug" component={MovieDetail}/>
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
