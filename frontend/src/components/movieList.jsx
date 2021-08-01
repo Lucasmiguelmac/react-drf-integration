@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MovieList = ({movies, movieListTitle}) => {
     return (
@@ -9,7 +10,9 @@ const MovieList = ({movies, movieListTitle}) => {
                     {movies.map((movie, index)=>{
                         return (
                             <div className="d-flex justify-content-start m-3" key={index} style={{height: "24rem", width:"16rem"}}>
-                                <img src={movie.image} alt="" style={{height: "24rem", width:"16rem", objectFit: "cover"}}/>
+                                <Link to={`/${movie.slug}/`}>
+                                    <img src={movie.image} alt="" style={{height: "24rem", width:"16rem", objectFit: "cover"}}/>
+                                </Link>
                             </div>
                         )
                     })}
@@ -18,7 +21,5 @@ const MovieList = ({movies, movieListTitle}) => {
         </>
     )
 }
-
-
 
 export default MovieList;
