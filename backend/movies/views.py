@@ -8,8 +8,17 @@ from . import serializers as ms
 
 class MovieViewset(ModelViewSet):
     queryset = mm.Movie.objects.all().order_by('-release_date')
-    serializer_class = ms.MovieSerializer
     lookup_field = 'slug'
+
+    serializer_class_by_action = {
+        'retrieve': ms.MovieDetailSerializer,
+        'list': ms.MovieListSerializer,
+    }
+
+    def get_serializer_class(self):
+        if hasattr(self, 'serializer_class_by_action'):
+            return self.serializer_class_by_action.get(self.action, self.serializer_class)
+        return super(MyModelViewSet, self).get_serializer_class()
 
 class RatingAPIView(GenericAPIView):
     queryset = mm.Rating.objects.all()
