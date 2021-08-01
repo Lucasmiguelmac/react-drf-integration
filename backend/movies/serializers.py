@@ -25,3 +25,4 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ('ratings', 'title', 'release_date', 'genre', 'plot', 'image', 'slug')
         lookup_field = 'slug'
+        read_only_fields = ('ratings', 'slug')

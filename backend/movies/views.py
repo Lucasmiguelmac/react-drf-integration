@@ -13,6 +13,10 @@ class MovieViewset(ModelViewSet):
     serializer_class_by_action = {
         'retrieve': ms.MovieDetailSerializer,
         'list': ms.MovieListSerializer,
+        'create': ms.MovieDetailSerializer,
+        'update': ms.MovieDetailSerializer,
+        'partial_update': ms.MovieDetailSerializer,
+        'destroy': ms.MovieDetailSerializer
     }
 
     def get_serializer_class(self):
