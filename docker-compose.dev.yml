@@ -10,7 +10,8 @@ services:
           - ./backend/:/usr/src/app/
           - ipython_data_local:/root/.ipython/profile_default
         ports: 
-          - "8000:8000"
+          - "8000:8000" # Django app ports
+          - "4000:4000" # Django debugger ports
         env_file: 
           - ./backend/.env
         restart: always
