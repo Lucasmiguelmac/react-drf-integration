@@ -11,3 +11,4 @@ class CustomUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True}
         }
+        read_only_fields = ('username',)
