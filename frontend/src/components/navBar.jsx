@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <nav class="navbar fixed-top navbar-light" style={{backgroundColor: "#4e5cad"}}>
-            <div class="container-fluid">
+        <nav className="navbar fixed-top navbar-light" style={{backgroundColor: "#4e5cad"}}>
+            <div className="container-fluid">
                 <Link to="/" className="navbar-brand">
                     Home
                 </Link>
