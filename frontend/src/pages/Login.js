@@ -9,14 +9,14 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [token, setToken] = useCookies(['loginToken']);
     let history = useHistory();
+    const [isLogin, setIsLogin] = useState(true)
+    const [password2, setPassword2] = useState("")
 
     useEffect(()=>{
         if (token['loginToken']){
             history.push('/')
         };
     },[token])
-
-
     
     const headers = {
         'Content-Type': 'application/json',
@@ -29,7 +29,18 @@ const Login = () => {
         axios.post(`http://localhost:8000/api/login/`, data, {"headers": headers})
         .then(response => {
             setToken('loginToken', response.data.key);
-            console.log(response.data.key)
+        })
+        .catch(error => console.log(error))
+    };
+    const handleRegister = () => {
+        const data = {
+            email: email,
+            password1: password,
+            password2: password2
+        };
+        axios.post(`http://localhost:8000/api/register/`, data, {"headers": headers})
+        .then(response => {
+            setToken('loginToken', response.data.key);
         })
         .catch(error => console.log(error))
     };
@@ -67,20 +78,55 @@ const Login = () => {
                             onChange={e => setPassword(e.target.value)}
                             />
                         </div>
-                        <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={handleLogin}
-                        >
-                            Log In
-                        </button>
-                        <button
-                        type="submit"
-                        className="btn btn-link"
-                        style={{marginLeft: "1rem"}}
-                        >
-                            Register
-                        </button>
+                        {isLogin ?
+                        <>
+                            <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleLogin}
+                            >
+                                Log In
+                            </button>
+                            <button
+                            type="button"
+                            className="btn btn-link"
+                            style={{marginLeft: "1rem"}}
+                            onClick={()=>setIsLogin(false)}
+                            >
+                                Register
+                            </button>
+                        </>
+                        :
+                        <>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputPassword1" className="form-label">
+                                Re-enter your password
+                                </label>
+                                <input
+                                type="password"
+                                className="form-control"
+                                id="exampleInputPassword2"
+                                value={password2}
+                                onChange={e => setPassword2(e.target.value)}
+                                />
+                            </div>
+                            <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleRegister}
+                            >
+                                Register
+                            </button>
+                            <button
+                            type="button"
+                            className="btn btn-link"
+                            style={{marginLeft: "1rem"}}
+                            onClick={()=>setIsLogin(true)}
+                            >
+                                Log In
+                            </button> 
+                        </>
+                        }
                     </form>
                 </div>
             </div>
