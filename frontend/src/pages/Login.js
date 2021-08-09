@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 
@@ -7,7 +7,16 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useCookies(['loginToken'])
+    const [token, setToken] = useCookies(['loginToken']);
+    let history = useHistory();
+
+    useEffect(()=>{
+        if (token['loginToken']){
+            history.push('/')
+        };
+    },[token])
+
+
     
     const headers = {
         'Content-Type': 'application/json',
@@ -18,7 +27,10 @@ const Login = () => {
             password: password
         };
         axios.post(`http://localhost:8000/api/login/`, data, {"headers": headers})
-        .then(response => setToken('loginToken', response))
+        .then(response => {
+            setToken('loginToken', response.data.key);
+            console.log(response.data.key)
+        })
         .catch(error => console.log(error))
     };
 
@@ -63,7 +75,7 @@ const Login = () => {
                             Log In
                         </button>
                         <button
-                        type="button"
+                        type="submit"
                         className="btn btn-link"
                         style={{marginLeft: "1rem"}}
                         >
